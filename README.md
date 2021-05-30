@@ -9,81 +9,19 @@ Before we begin, I'd like to appreciate Mr. Marcin Wojtysiak's effort in creatin
 * Java Runtime Environment 8 to 11
 * maven 3.3+
 
-## Creating the Application
-First, start a Maven project using your favorite IDE or just creating an empty folder, like `spring-boot-helloworld-example`, and put `pom.xml` file containing this:
-
+## Running the Application on your Desktop
+First, clone the repository:
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.springboot</groupId>
-    <artifactId>hello-world</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-
-    <!-- Inherit defaults from Spring Boot -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.RELEASE</version>
-    </parent>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
+https://github.com/andybondar/spring-boot-helloworld-example.git
 ```
 
-Also, create the following folders:
-
-* `src/main/java/com/springboot/` - source directory, you'll need to put here the `Application.java` file containg single Java class with public static void main method that starts Spring Boot application
-* `src/main/resources/`- you can put `application.properties` file here
-
-Change directory to `src/main/java/com/springboot/` and create `Application.java` file containing this:
-```
-package com.springboot;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-@EnableAutoConfiguration
-public class Application {
-
-    @RequestMapping("/")
-    String index() {
-        return "Hello World!";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-}
-```
-
-Finally, navigate to the project's root folder (the one containing `pom.xml` file) and type:
+Change directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save tham and then type:
 
 ```
 mvn spring-boot:run
 ```
 
-Maven will build the Application and start Spring Boot:
+Maven will build the Application and, if it succeeds, will start the Spring Boot:
 ```
 
   .   ____          _            __ _ _
@@ -104,8 +42,6 @@ Maven will build the Application and start Spring Boot:
 2021-05-29 19:19:00.046  INFO 69 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
 2021-05-29 19:19:00.329  INFO 69 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2021-05-29 19:19:00.338  INFO 69 --- [           main] com.springboot.Application               : Started Application in 3.224 seconds (JVM running for 27.806)
-^C2021-05-29 19:19:07.073  INFO 69 --- [       Thread-4] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-
 ```
 
 ## Building JAR archive
@@ -117,9 +53,9 @@ If it succeeds, you should be able to find `target/hello-world-0.0.1-SNAPSHOT.ja
 
 ## Containerizing the Application
 Install `Docker Engine` if it is not installed yet.
-In the project's root directory, create `Dockerfile` with the following content:
+Run `docker build`:
 ```
-TBD
+docker build -t spring-boot-helloworld .
 ```
 
 
