@@ -15,7 +15,7 @@ First, clone the repository:
 https://github.com/andybondar/spring-boot-helloworld-example.git
 ```
 
-Change directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save tham and then type:
+Change directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save them and then type:
 
 ```
 mvn spring-boot:run
