@@ -6,6 +6,11 @@ Before we begin, I'd like to appreciate Mr. Marcin Wojtysiak's effort in creatin
 
 ## Containerizing the Application
 Install `Docker Engine` if it is not installed yet.
+Clone the repository:
+```
+git clone https://github.com/andybondar/spring-boot-helloworld-example.git
+```
+Change directory to the `spring-boot-helloworld-example`
 Run `docker build`:
 ```
 docker build -t spring-boot-helloworld:0.0.1 .
@@ -24,12 +29,7 @@ You may want to build the App manually and run it on your Desktop without contai
 
 ### Manual build and running
 
-First, clone the repository:
-```
-https://github.com/andybondar/spring-boot-helloworld-example.git
-```
-
-Change directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save them and then type:
+Assuming that you have cloned the repository and changed directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save them and then type:
 
 ```
 mvn spring-boot:run
