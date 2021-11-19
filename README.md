@@ -4,12 +4,26 @@
 This guide aims to instruct the beginners on how to create, build and run a Simple Java Web App based on Spring Boot framework.
 Before we begin, I'd like to appreciate Mr. Marcin Wojtysiak's effort in creating [this amazing tutorial](https://github.com/martinwojtus/tutorials/tree/master/spring-boot/hello-world). Also, [here](https://frontbackend.com/spring-boot/your-first-spring-boot-application-hello-world) here you can find detailed instructions on how to use it.
 
-## Requirements
+## Containerizing the Application
+Install `Docker Engine` if it is not installed yet.
+Run `docker build`:
+```
+docker build -t spring-boot-helloworld:0.0.1 .
+```
+
+At this point the Application is built and ready to run. If you don't want to do a manual building - skip the next chapter.
+
+## Running the Application on your Desktop
+
+You may want to build the App manually and run it on your Desktop without containerizing it, also you may want to build a JAR archive and store it somewhere for later use. In this case please follow the instructions below in this chapter.
+
+### Requirements
 
 * Java Runtime Environment 8 to 11
 * maven 3.3+
 
-## Running the Application on your Desktop
+### Manual build and running
+
 First, clone the repository:
 ```
 https://github.com/andybondar/spring-boot-helloworld-example.git
@@ -44,20 +58,15 @@ Maven will build the Application and, if it succeeds, will start the Spring Boot
 2021-05-29 19:19:00.338  INFO 69 --- [           main] com.springboot.Application               : Started Application in 3.224 seconds (JVM running for 27.806)
 ```
 
-## Building JAR archive
+### Building JAR archive
 In the project's root folder run this:
 ```
 mvn clean install
 ```
 If it succeeds, you should be able to find `target/hello-world-0.0.1-SNAPSHOT.jar` in the `target` directory.
 
-## Containerizing the Application
-Install `Docker Engine` if it is not installed yet.
-Run `docker build`:
-```
-docker build -t spring-boot-helloworld .
-```
-
+## Running the Application in a Kubernetes cluster
+TBD
 
 ## Using CI to build and containerize the Application
 ### GitHub Actions
@@ -67,7 +76,4 @@ TBD
 TBD
 
 ### GitLab CI
-TBD
-
-## Running the Application in a Kubernetes cluster
 TBD
