@@ -5,7 +5,7 @@ This guide aims to instruct the beginners on how to create, build and run a Simp
 Before we begin, I'd like to appreciate Mr. Marcin Wojtysiak's effort in creating [this amazing tutorial](https://github.com/martinwojtus/tutorials/tree/master/spring-boot/hello-world). Also, [here](https://frontbackend.com/spring-boot/your-first-spring-boot-application-hello-world) here you can find detailed instructions on how to use it.
 
 ## Containerizing the Application
-Install `Docker Engine` if it is not installed yet.
+Eventually, the process of building container images will be a part of CI/CD workflow and will be defined in the CI/CD workflow's configuration. But before it's done, you will have to build the image manually. To do that - install `Docker Engine` on your computer if it is not installed yet.
 Clone the repository:
 ```
 git clone https://github.com/andybondar/spring-boot-helloworld-example.git
@@ -16,11 +16,11 @@ Run `docker build`:
 docker build -t spring-boot-helloworld:0.0.1 .
 ```
 
-At this point the Application is built and ready to run. If you don't want to do a manual building - skip the next chapter.
+At this point, the Application is built and ready to run. If you don't want to do a manual building - skip the next chapter.
 
 ## Running the Application on your Desktop
 
-You may want to build the App manually and run it on your Desktop without containerizing it, also you may want to build a JAR archive and store it somewhere for later use. In this case please follow the instructions below in this chapter.
+You may want to build the App manually and run it on your Desktop without containerizing it, also you may want to build a JAR archive and store it somewhere for later use. In this case, please follow the instructions below in this chapter.
 
 ### Requirements
 
@@ -29,7 +29,7 @@ You may want to build the App manually and run it on your Desktop without contai
 
 ### Manual build and running
 
-Assuming that you have cloned the repository and changed directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save them and then type:
+Assuming that you have cloned the repository and changed the directory to the `spring-boot-helloworld-example`, do whatever changes you need in the Java code, save them and then type:
 
 ```
 mvn spring-boot:run
@@ -59,14 +59,52 @@ Maven will build the Application and, if it succeeds, will start the Spring Boot
 ```
 
 ### Building JAR archive
-In the project's root folder run this:
+In the project's root folder, run this:
 ```
 mvn clean install
 ```
 If it succeeds, you should be able to find `target/hello-world-0.0.1-SNAPSHOT.jar` in the `target` directory.
 
-## Running the Application in a Kubernetes cluster
+## Provisioning a Kubernetes Cluster
 TBD
+
+## Running the Application in a Kubernetes cluster
+For now it is assumed that the Kubernetes Cluster is up and running and it is GKE Kubernetes Cluster. However, other Cloud Kubernetes Services, such as AWS EKS, AKS, etc. -  also will do.
+
+### Send container image to container registry
+In this tutorial we will use https://hub.docker.com/ container registry, but any alternative, like GCR or AWS ECR will do.
+
+* tag your local image (use your own account name instead of `andriibondarua` hereafter):
+```
+docker tag { image_id } andriibondarua/spring-boot-helloworld:0.0.1
+```
+
+* generate access token in the DockerHub UI: **Account Settings -> Security -> New Access Token**, Follow the instructions
+* login to DockerHub (use access token as password):
+```
+docker login -u andriibondarua
+Password:
+```
+
+* push container repo to the reqistry:
+```
+docker push andriibondarua/spring-boot-helloworld:0.0.1
+```
+
+### k8s objects
+There are 3 k8s objects that we're going to create here:
+* Namespace
+* Deployment
+* Service
+
+### Deployment
+It is assumed that `kubectl` CLI is installed on you computer.
+Connect to the Kubernetes Cluster, change directory to `k8s` and run the following commands:
+```
+kubectl apply -f ns.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml 
+```
 
 ## Using CI to build and containerize the Application
 ### GitHub Actions
