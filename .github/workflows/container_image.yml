@@ -19,4 +19,19 @@ jobs:
       run: docker build . --file Dockerfile --tag spring-boot-helloworld:0.0.1
 
     - name: Run Containerized App
-      run: docker run -p 8080:8080 -d --rm spring-boot-helloworld:0.0.1
+      run: docker run -p 8080:8080 -d --rm --name spring-boot-app spring-boot-helloworld:0.0.1
+
+    # - name: List sockets on the Host System
+    #   run: netstat -ntpl
+
+    - name: Get container logs
+      run: docker exec spring-boot-app netstat -ntpl
+
+    # - name: Get container logs
+    #   run: docker logs spring-boot-app
+
+    # - name: Get Processes from running Container
+    #   run: docker exec spring-boot-app ps
+
+    # - name: Get HTTP response from the App
+    #   run: curl -I http://127.0.0.1:8080
